@@ -64,7 +64,7 @@ class YandexParser():
         print('start grab images')
         save_files=[]
         for i in tqdm(range(len(self.image_links))):
-            save_name = f'{self.save_path}/{keyword}_{i}.jpg'
+            save_name = f'{self.save_path}/{self.keyword}_{i}.jpg'
             utils.get_image_by_url(self.image_links[i], save_name)
             save_files.append(save_name)
         self.pdata['save_file']=save_files
