@@ -4,8 +4,9 @@ from tqdm import tqdm
 import pandas as pd
 
 class YandexParser():
-    def __init__(self,save_path,limit=0,url=None):
+    def __init__(self,save_path,keyword = '_',limit=0,url=None):
         self.save_path=save_path
+        self.keyword=keyword
         self.wd=utils.init_wd()
         self.limit=limit
         if(url):
@@ -63,7 +64,7 @@ class YandexParser():
         print('start grab images')
         save_files=[]
         for i in tqdm(range(len(self.image_links))):
-            save_name = f'{self.save_path}/{i}.jpg'
+            save_name = f'{self.save_path}/{keyword}_{i}.jpg'
             utils.get_image_by_url(self.image_links[i], save_name)
             save_files.append(save_name)
         self.pdata['save_file']=save_files
