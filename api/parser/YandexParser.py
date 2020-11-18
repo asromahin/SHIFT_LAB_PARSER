@@ -21,13 +21,11 @@ class YandexParser:
             self.set_url(url)
 
     def set_url(self, url):
-        self.url = url
-        if self.wd.current_url != self.url:
-            self.wd.get(self.url)
+        if self.wd.current_url != url:
+            self.wd.get(url)
             time.sleep(1)
 
     def get_links_to_images(self, limit=200):
-        last_height = self.wd.execute_script("return document.body.scrollHeight")
         last_len = 0
         print('scroll page with images')
         while last_len < limit:
@@ -39,12 +37,10 @@ class YandexParser:
             except:
                 pass
             time.sleep(1)
-            new_height = self.wd.execute_script("return document.body.scrollHeight")
             imgs = self.wd.find_elements_by_class_name('serp-item__link')
             if last_len == len(imgs):
                 break
 
-            last_height = new_height
             last_len = len(imgs)
 
         print('end scroll page with images')
@@ -123,32 +119,8 @@ class YandexParser:
         self.wd.get(image_url)
         print(f'open {image_url[:60]}... (Your image URL)')
         time.sleep(1)
-        # self.wd.find_element_by_class_name('input__cbir-button').click()
-        # time.sleep(1)
-        #
-        # print(f'set image url {image_url}')
-        # cur_elem = self.wd.find_element_by_class_name('cbir-panel__input')
-        # target_panel = cur_elem.find_element_by_class_name('input__control')
-        # print(target_panel.get_attribute('value'))
-        # target_panel.click()
-        # target_panel.clear()
-        # target_panel.send_keys(image_url)
-        # print(target_panel.get_attribute('value'))
-        #
         self.wd.get_screenshot_as_file(save_screen)
-        # time.sleep(2)
-        # cur_elem.find_element_by_class_name('cbir-panel__search-button').click()
-        # time.sleep(5)
         print('image is set')
-        start_url = self.wd.current_url
-        seconds = 0
-        limit_seconds = 60
-        # while(True):
-        #    if(self.wd.current_url!=start_url or seconds>=limit_seconds):
-        #        break
-        #    time.sleep(1)
-        #    seconds+=1
-        #    print('while',seconds,'seconds')
         time.sleep(1)
         self.wd.save_screenshot('test.png')
 
@@ -165,4 +137,3 @@ class YandexParser:
 
         # Killing Google Chrome instances created by the parser
         kill_chrome_instances()
-
