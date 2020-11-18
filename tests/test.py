@@ -8,4 +8,3 @@ image_url = 'https://yandex.ru/images/search?rpt=imageview&url=https%3A%2F%2Fava
 
 # Storing images in the 'data' folder
 YP.get_by_image_url(image_url, limit=300)
-
