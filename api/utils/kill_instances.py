@@ -14,7 +14,6 @@ def kill_chrome_instances():
     Killing instances of Google Chrome created by YandexParser
     """
     print('\nKilling Google Chrome instances...')
-    found = 0
     killed = 0
     for process in psutil.process_iter():
         if 'chrome' in process.name():
